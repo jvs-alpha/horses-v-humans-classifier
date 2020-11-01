@@ -1,0 +1,5 @@
+**/__pycache__/
+venv/
+train/
+validation/
+hvm.h5
