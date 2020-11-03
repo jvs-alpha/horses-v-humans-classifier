@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 import os
+import random
 
 
 def loadtest():
@@ -30,8 +31,9 @@ if __name__ == "__main__":
     print("The test accuracy", test_acc)
     prediction = model.predict(test)
     for i in range(20):
+        index = random.randint(0, len(test)-1)
         plt.grid(False)
         plt.imshow(test[i],cmap="gray")
-        plt.xlabel("Actual: " + class_names[t_label[i]])
-        plt.title("Prediction " + class_names[np.argmax(prediction[i])])
+        plt.xlabel("Actual: " + class_names[t_label[index]])
+        plt.title("Prediction " + class_names[np.argmax(prediction[index])])
         plt.show()
