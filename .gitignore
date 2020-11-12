@@ -2,6 +2,6 @@
 venv/
 train/
 validation/
-hvm.h5
+*.h5
 .ipynb_checkpoints/
 archive.zip
