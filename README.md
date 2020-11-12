@@ -7,5 +7,5 @@ I took the images for training from the keggle
 
 ## TODO
 - [x] Write a test script
-- [ ] Write a test script for real images
+- [x] Write a test script for real images
 - [ ] Write a video image classifier
