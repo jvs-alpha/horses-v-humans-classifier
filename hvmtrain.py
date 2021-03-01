@@ -63,7 +63,7 @@ if __name__ == "__main__":
         keras.layers.Dense(2,activation="softmax")
         ])
     model.compile(optimizer="adam",loss="sparse_categorical_crossentropy",metrics=["accuracy"])
-    model.fit(train,label,batch_size=3,epochs=15)
+    model.fit(train,label,batch_size=3,epochs=8)
     test, t_label = loadtest()
     test_loss, test_acc = model.evaluate(test,t_label)
     print("The test accuracy", test_acc)
