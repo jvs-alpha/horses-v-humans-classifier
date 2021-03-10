@@ -2,8 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-import random
+
 
 
 if __name__ == "__main__":
@@ -11,16 +10,22 @@ if __name__ == "__main__":
         "train",
         seed=123,
         image_size=(300,300),
-        batch_size=345
+        batch_size=3
     )
     test = keras.preprocessing.image_dataset_from_directory(
         "validation",
         seed=123,
         image_size=(300,300),
-        batch_size=345
+        batch_size=3
     )
-    class_names = test.class_names
-    print(class_names)
+    # Normalization layer for converting
+    normalization_layer = keras.layers.experimental.preprocessing.Rescaling(1./255)
+    # Normalization of train data
+    normalized_ds = train.map(lambda x, y: (normalization_layer(x), y))
+    image_train, labels_train = next(iter(normalized_ds))
+    # Normalization of test data
+    normalized_ds = test.map(lambda x, y: (normalization_layer(x), y))
+    image_test, labels_test = next(iter(normalized_ds))
     # THis is without normalization
     model = keras.Sequential([
         keras.layers.Flatten(input_shape=(300,300,3)),
@@ -29,17 +34,7 @@ if __name__ == "__main__":
         keras.layers.Dense(2,activation="softmax")
         ])
     model.compile(optimizer="adam",loss="sparse_categorical_crossentropy",metrics=["accuracy"])
-    history = model.fit(train,validation_data=test,epochs=10)
-    test, t_label = loadtest()
-    test_loss, test_acc = model.evaluate(test,t_label)
+    history = model.fit(train,validation_data=test,batch_size=3,epochs=4)
+    test_loss, test_acc = model.evaluate(image_test,labels_test)
     print("The test accuracy", test_acc)
     model.save("hvm.h5")
-    # prediction = model.predict(test)
-    # for i in range(20):
-    #     plt.grid(False)
-    #     plt.imshow(test[i],cmap="gray")
-    #     plt.xlabel("Actual: " + class_names[t_label[i]])
-    #     plt.title("Prediction: " + class_names[np.argmax(prediction[i])])
-    #     plt.show(block=False)
-    #     plt.pause(3)
-    #     plt.close()
