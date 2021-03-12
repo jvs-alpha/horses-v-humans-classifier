@@ -14,7 +14,6 @@ if __name__ == "__main__":
         "validation",
         seed=123,
         image_size=(300,300),
-        batch_size=3
     )
     class_names = test.class_names
     normalization_layer = keras.layers.experimental.preprocessing.Rescaling(1./255)
@@ -23,6 +22,7 @@ if __name__ == "__main__":
     model = keras.models.load_model(sys.argv[1])
     test_loss, test_acc = model.evaluate(image_test,labels_test)
     prediction = model.predict(image_test)
+    print(len(image_test))
     if sys.argv[2] == "image":
         for i in range(20):
             index = i
