@@ -5,6 +5,7 @@ with the basic example method of image classifier so we can improve this method 
 I took the images for training from the keggle<br>
 [Horses Or Humans Dataset](https://www.kaggle.com/sanikamal/horses-or-humans-dataset)<br>
 [Google Image Loading](https://www.tensorflow.org/tutorials/images/classification)<br>
+[Tweaking the optimizer](https://keras.io/api/optimizers/)</br>
 
 ## TODO
 - [x] Write a test script

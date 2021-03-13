@@ -21,6 +21,7 @@ if __name__ == "__main__":
     # Normalization layer for converting
     normalization_layer = keras.layers.experimental.preprocessing.Rescaling(1./255)
     # Normalization of train data
+    # The x is the images data and the y is the label
     normalized_ds = train.map(lambda x, y: (normalization_layer(x), y))
     image_train, labels_train = next(iter(normalized_ds))
     # Normalization of test data
